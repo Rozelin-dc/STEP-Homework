@@ -2,18 +2,16 @@
 #include "utils.h"
 using namespace std;
 
-vector<vector<string>> createNewDictionary(vector<string> dictionary, int length);
+vector<vector<string>> createNewDictionary(int length);
 int search(string word, vector<vector<string>> newDictionary);
 
-int main() {
-  vector<string> dictionary = loadFile("./anagram/words.txt");
+const vector<string> dictionary = loadFile("./anagram/words.txt");
 
+int main() {
   string input;
   cin>>input;
 
-  vector<vector<string>> newDictionary = createNewDictionary(dictionary, input.length());
-  // 新辞書ソート
-  sort(newDictionary.begin(), newDictionary.end(),[](const vector<string> &alpha, const vector<string> &beta){return alpha[0] < beta[0];});
+  vector<vector<string>> newDictionary = createNewDictionary(input.length());
 
   string sortedInput = input;
   std::sort(sortedInput.begin(), sortedInput.end());
@@ -39,7 +37,7 @@ int main() {
 }
 
 /** 入力された単語の長さに合わせて新辞書作成 */
-vector<vector<string>> createNewDictionary(vector<string> dictionary, int length) {
+vector<vector<string>> createNewDictionary(int length) {
   vector<vector<string>> newDictionary(0, vector<string>(2));
   for (int i = 0; i < (int)dictionary.size(); i++)
   {
@@ -48,6 +46,7 @@ vector<vector<string>> createNewDictionary(vector<string> dictionary, int length
     std::sort(str.begin(), str.end());
     newDictionary.push_back({ str, dictionary[i] });
   }
+  sort(newDictionary.begin(), newDictionary.end(),[](const vector<string> &alpha, const vector<string> &beta){return alpha[0] < beta[0];});
   return newDictionary;
 }
 
