@@ -67,7 +67,7 @@ vector<string> search(string word, vector<vector<string>> newDictionary) {
     } else {
       begin = idx + 1;
     }
-    if(end >= begin) {
+    if(end <= begin) {
       idx = end;
       break;
     }
