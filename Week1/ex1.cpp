@@ -36,9 +36,9 @@ vector<string> loadDictionary() {
 
 vector<vector<string>> createNewDictionary(vector<string> dictionary, int length) {
   vector<vector<string>> newDictionary(0, vector<string>(2));
-  for (int i = 0; i < dictionary.size(); i++)
+  for (int i = 0; i < (int)dictionary.size(); i++)
   {
-    if (dictionary[i].length() != length) continue;
+    if ((int)dictionary[i].length() != length) continue;
     string str = dictionary[i];
     std::sort(str.begin(), str.end());
     newDictionary.push_back({ str, dictionary[i] });
