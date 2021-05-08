@@ -56,32 +56,34 @@ vector<vector<string>> createNewDictionary(vector<string> dictionary, int length
 /** アナグラム検索 */
 vector<string> search(string word, vector<vector<string>> newDictionary) {
   bool found = false;
-  int begin = 0, end = (int)newDictionary.size();
-  int idx;
+  int beginIdx = 0, endIdx = (int)newDictionary.size();
+  int searchIdx;
   while(!found) {
-    idx = (end - begin) / 2;
-    if(newDictionary[idx][0] == word) {
+    searchIdx = (endIdx - beginIdx) / 2;
+    if(newDictionary[searchIdx][0] == word) {
       found = true;
-    } else if(newDictionary[idx][0] > word) {
-      end = idx - 1;
+      break;
+    } else if(word.compare(newDictionary[searchIdx][0]) < 0) {
+      endIdx = searchIdx - 1;
     } else {
-      begin = idx + 1;
+      beginIdx = searchIdx + 1;
     }
-    if(end <= begin) {
-      idx = end;
+    cout<<word.compare(newDictionary[searchIdx][0])<<beginIdx<<" "<<endIdx<<endl;
+    if(endIdx <= beginIdx) {
+      searchIdx = endIdx;
       break;
     }
   }
   vector<string> ans(0);
-  int searchIdx = idx;
-  while(newDictionary[searchIdx][0] == word) {
-    ans.push_back(newDictionary[searchIdx][1]);
-    searchIdx--;
+  int idx = searchIdx;
+  while(newDictionary[idx][0] == word) {
+    ans.push_back(newDictionary[idx][1]);
+    idx--;
   }
-  searchIdx = idx + 1;
-  while(newDictionary[searchIdx][0] == word) {
-    ans.push_back(newDictionary[searchIdx][1]);
-    searchIdx++;
+  idx = searchIdx + 1;
+  while(newDictionary[idx][0] == word) {
+    ans.push_back(newDictionary[idx][1]);
+    idx++;
   }
   return ans;
 }
