@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
+#include "LoadDictionary.h"
 using namespace std;
 
-vector<string> loadDictionary();
 vector<vector<string>> createNewDictionary(vector<string> dictionary, int length);
 int search(string word, vector<vector<string>> newDictionary);
 
@@ -36,21 +36,6 @@ int main() {
     cout<<ans[i]<<endl;
   }
   return 0;
-}
-
-/** 辞書読み込み */
-vector<string> loadDictionary() {
-  std::ifstream ifs("./anagram/words.txt");
-  if (ifs.fail()) {
-    std::cerr << "Failed to open file." << std::endl;
-    return {"error"};
-  }
-  string str;
-  vector<string> dictionary(0);
-  while (std::getline(ifs, str)) {
-    dictionary.push_back(str);
-  }
-  return dictionary;
 }
 
 /** 入力された単語の長さに合わせて新辞書作成 */
