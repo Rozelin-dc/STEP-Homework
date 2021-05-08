@@ -3,7 +3,7 @@ using namespace std;
 
 vector<string> loadDictionary();
 vector<vector<string>> createNewDictionary(vector<string> dictionary, int length);
-vector<string> search(string word, vector<vector<string>> newDictionary);
+int search(string word, vector<vector<string>> newDictionary);
 
 int main() {
   vector<string> dictionary = loadDictionary();
@@ -17,7 +17,20 @@ int main() {
 
   string sortedInput = input;
   std::sort(sortedInput.begin(), sortedInput.end());
-  vector<string> ans = search(sortedInput, newDictionary);
+  int findIdx = search(sortedInput, newDictionary);
+
+  vector<string> ans(0);
+  int idx = findIdx;
+  while(newDictionary[idx][0] == sortedInput) {
+    ans.push_back(newDictionary[idx][1]);
+    idx--;
+  }
+  idx = findIdx + 1;
+  while(newDictionary[idx][0] == sortedInput) {
+    ans.push_back(newDictionary[idx][1]);
+    idx++;
+  }
+
   for (int i = 0; i < (int)ans.size(); i++)
   {
     cout<<ans[i]<<endl;
@@ -54,36 +67,27 @@ vector<vector<string>> createNewDictionary(vector<string> dictionary, int length
 }
 
 /** アナグラム検索 */
-vector<string> search(string word, vector<vector<string>> newDictionary) {
+int search(string word, vector<vector<string>> newDictionary) {
   bool found = false;
-  int beginIdx = 0, endIdx = (int)newDictionary.size();
-  int searchIdx;
+  int beginIdx = 0;
+  int endIdx = (int)newDictionary.size();
+  int searchIdx = (endIdx - beginIdx) / 2;
   while(!found) {
-    searchIdx = (endIdx - beginIdx) / 2;
+    searchIdx = ((endIdx - beginIdx) / 2) + beginIdx;
+
     if(newDictionary[searchIdx][0] == word) {
       found = true;
-      break;
+      return searchIdx;
     } else if(word.compare(newDictionary[searchIdx][0]) < 0) {
       endIdx = searchIdx - 1;
     } else {
       beginIdx = searchIdx + 1;
     }
-    cout<<word.compare(newDictionary[searchIdx][0])<<beginIdx<<" "<<endIdx<<endl;
+
     if(endIdx <= beginIdx) {
       searchIdx = endIdx;
-      break;
+      return searchIdx;
     }
   }
-  vector<string> ans(0);
-  int idx = searchIdx;
-  while(newDictionary[idx][0] == word) {
-    ans.push_back(newDictionary[idx][1]);
-    idx--;
-  }
-  idx = searchIdx + 1;
-  while(newDictionary[idx][0] == word) {
-    ans.push_back(newDictionary[idx][1]);
-    idx++;
-  }
-  return ans;
+  return -1;
 }
