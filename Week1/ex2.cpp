@@ -4,7 +4,8 @@ using namespace std;
 
 vector<string> findAnagram(string inputPath);
 vector<vector<string>> createNewDictionary(int length);
-string findBestAnagram(vector<string> results);
+vector<string> search(string word, vector<vector<string>> newDictionary);
+string findBestAnagram(vector<string> anagrams);
 int calculateScore(string word);
 
 const vector<string> dictionary = loadFile("./anagram/words.txt");
@@ -17,6 +18,16 @@ int main() {
 vector<string> findAnagram(string inputPath) {
   vector<string> inputs = loadFile(inputPath);
   vector<vector<string>> newDictionary = createNewDictionary(inputs[0].length());
+
+  vector<string> ans(0);
+
+  for (int i = 0; i < inputs.size(); i++)
+  {
+    vector<string> anagrams = search(inputs[i], newDictionary);
+    string bestAnagram = findBestAnagram(anagrams);
+    ans.push_back(bestAnagram);
+  }
+  return ans;
 }
 
 /** 入力された単語の長さに合わせて新辞書作成 */
@@ -29,19 +40,23 @@ vector<vector<string>> createNewDictionary(int length) {
     std::sort(str.begin(), str.end());
     newDictionary.push_back({ str, dictionary[i] });
   }
-  sort(newDictionary.begin(), newDictionary.end(),[](const vector<string> &alpha, const vector<string> &beta){return alpha[0] < beta[0];});
+  sort(newDictionary.begin(), newDictionary.end(), [](const vector<string> &alpha, const vector<string> &beta){return alpha[0] < beta[0];});
   return newDictionary;
 }
 
+vector<string> search(string word, vector<vector<string>> newDictionary) {
+
+}
+
 /** 見つかったアナグラムの中からベストスコアのものを抽出 */
-string findBestAnagram(vector<string> results) {
+string findBestAnagram(vector<string> anagrams) {
   string ans;
   int bestScore = 0;
-  for (int i = 0; i < results.size(); i++)
+  for (int i = 0; i < anagrams.size(); i++)
   {
-    if(calculateScore(results[i]) > bestScore) {
-      ans = results[i];
-      bestScore = calculateScore(results[i]);
+    if(calculateScore(anagrams[i]) > bestScore) {
+      ans = anagrams[i];
+      bestScore = calculateScore(anagrams[i]);
     }
   }
   return ans;
