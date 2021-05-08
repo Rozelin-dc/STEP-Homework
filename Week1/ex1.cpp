@@ -7,10 +7,14 @@ vector<string> search(string word, vector<vector<string>> newDictionary);
 
 int main() {
   vector<string> dictionary = loadDictionary();
+
   string input;
   cin>>input;
+
   vector<vector<string>> newDictionary = createNewDictionary(dictionary, input.length());
+  // 新辞書ソート
   sort(newDictionary.begin(), newDictionary.end(),[](const vector<string> &alpha, const vector<string> &beta){return alpha[0] < beta[0];});
+
   string sortedInput = input;
   std::sort(sortedInput.begin(), sortedInput.end());
   vector<string> ans = search(sortedInput, newDictionary);
@@ -21,6 +25,7 @@ int main() {
   return 0;
 }
 
+/** 辞書読み込み */
 vector<string> loadDictionary() {
   std::ifstream ifs("./anagram/words.txt");
   if (ifs.fail()) {
@@ -35,6 +40,7 @@ vector<string> loadDictionary() {
   return dictionary;
 }
 
+/** 入力された単語の長さに合わせて新辞書作成 */
 vector<vector<string>> createNewDictionary(vector<string> dictionary, int length) {
   vector<vector<string>> newDictionary(0, vector<string>(2));
   for (int i = 0; i < (int)dictionary.size(); i++)
@@ -47,6 +53,7 @@ vector<vector<string>> createNewDictionary(vector<string> dictionary, int length
   return newDictionary;
 }
 
+/** アナグラム検索 */
 vector<string> search(string word, vector<vector<string>> newDictionary) {
   bool found = false;
   int begin = 0, end = (int)newDictionary.size();
