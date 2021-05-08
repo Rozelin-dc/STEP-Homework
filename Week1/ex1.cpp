@@ -13,11 +13,16 @@ int main() {
   string input;
   cin>>input;
   vector<vector<string>> newDictionary = createNewDictionary(dictionary, input.length());
-  for (int i = 0; i < 10; i++)
+  for (int i = 0; i < 20; i++)
   {
     cout<<newDictionary[i][0]<<" "<<newDictionary[i][1]<<endl;
   }
-  
+  cout<<"sort"<<endl;
+  sort(newDictionary.begin(), newDictionary.end(),[](const vector<string> &alpha, const vector<string> &beta){return alpha[0] < beta[0];});
+  for (int i = 0; i < 20; i++)
+  {
+    cout<<newDictionary[i][0]<<" "<<newDictionary[i][1]<<endl;
+  }
 }
 
 vector<string> loadDictionary() {
