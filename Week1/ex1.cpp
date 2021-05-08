@@ -3,6 +3,7 @@ using namespace std;
 
 vector<string> loadDictionary();
 vector<vector<string>> createNewDictionary(vector<string> dictionary, int length);
+vector<string> search(string word, vector<vector<string>> newDictionary);
 
 int main() {
   vector<string> dictionary = loadDictionary();
@@ -23,6 +24,14 @@ int main() {
   {
     cout<<newDictionary[i][0]<<" "<<newDictionary[i][1]<<endl;
   }
+  string sortedInput = input;
+  std::sort(sortedInput.begin(), sortedInput.end());
+  vector<string> ans = search(sortedInput, newDictionary);
+  for (int i = 0; i < (int)ans.size(); i++)
+  {
+    cout<<ans[i]<<endl;
+  }
+  return 0;
 }
 
 vector<string> loadDictionary() {
@@ -49,4 +58,36 @@ vector<vector<string>> createNewDictionary(vector<string> dictionary, int length
     newDictionary.push_back({ str, dictionary[i] });
   }
   return newDictionary;
+}
+
+vector<string> search(string word, vector<vector<string>> newDictionary) {
+  bool found = false;
+  int begin = 0, end = (int)newDictionary.size();
+  int idx;
+  while(!found) {
+    idx = (end - begin) / 2;
+    if(newDictionary[idx][0] == word) {
+      found = true;
+    } else if(newDictionary[idx][0] > word) {
+      end = idx - 1;
+    } else {
+      begin = idx + 1;
+    }
+    if(end >= begin) {
+      idx = end;
+      break;
+    }
+  }
+  vector<string> ans(0);
+  int searchIdx = idx;
+  while(newDictionary[searchIdx][0] == word) {
+    ans.push_back(newDictionary[searchIdx][1]);
+    searchIdx--;
+  }
+  searchIdx = idx + 1;
+  while(newDictionary[searchIdx][0] == word) {
+    ans.push_back(newDictionary[searchIdx][1]);
+    searchIdx++;
+  }
+  return ans;
 }
