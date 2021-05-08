@@ -1,8 +1,8 @@
-#include "LoadDictionary.h"
+#include "utils.h"
 
 /** 辞書読み込み */
-vector<string> loadDictionary() {
-  std::ifstream ifs("./anagram/words.txt");
+vector<string> loadFile(string path) {
+  std::ifstream ifs(path);
   if (ifs.fail()) {
     std::cerr << "Failed to open file." << std::endl;
     return {"error"};

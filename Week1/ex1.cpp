@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
-#include "LoadDictionary.h"
+#include "utils.h"
 using namespace std;
 
 vector<vector<string>> createNewDictionary(vector<string> dictionary, int length);
 int search(string word, vector<vector<string>> newDictionary);
 
 int main() {
-  vector<string> dictionary = loadDictionary();
+  vector<string> dictionary = loadFile("./anagram/words.txt");
 
   string input;
   cin>>input;

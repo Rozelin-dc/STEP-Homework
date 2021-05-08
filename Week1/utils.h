@@ -1,4 +1,4 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<string> loadDictionary();
+vector<string> loadFile(string path);

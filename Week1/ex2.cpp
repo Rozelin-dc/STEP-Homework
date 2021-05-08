@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
-#include "LoadDictionary.h"
+#include "utils.h"
 using namespace std;
 
+vector<string> findAnagram(string inputPath);
+int getScore(string result);
+
 int main() {
-  vector<string> dictionary = loadDictionary();
-  for (int i = 0; i < 10; i++)
-  {
-    cout<<dictionary[i]<<endl;
-  }
+  vector<string> dictionary = loadFile("./anagram/words.txt");
   
 }
