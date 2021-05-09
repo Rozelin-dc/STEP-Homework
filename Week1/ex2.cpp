@@ -8,7 +8,7 @@ vector<string> search(string word);
 bool isSubset(vector<int> inputMap, vector<int> wordMap);
 string findBestAnagram(vector<string> anagrams);
 int calculateScore(string word);
-void output(char *fileName, vector<string> contents);
+void output(const char *fileName, vector<string> contents);
 
 const vector<string> dictionary = loadFile("./anagram/words.txt");
 vector<string> newDictionary(0);
@@ -16,19 +16,18 @@ vector<vector<int>> wordsMap(0, vector<int>(26));
 
 int main() {
   vector<string> ans;
-  char *outputPath;
   
-  outputPath = "./anagram/small-answer.txt";
+  const char *outputPath1 = "./anagram/small-answer.txt";
   ans = findAnagrams("./anagram/small.txt");
-  output(outputPath, ans);
+  output(outputPath1, ans);
 
-  outputPath = "./anagram/medium-answer.txt";
+  const char *outputPath2 = "./anagram/medium-answer.txt";
   ans = findAnagrams("./anagram/medium.txt");
-  output(outputPath, ans);
+  output(outputPath2, ans);
 
-  outputPath = "./anagram/large-answer.txt";
+  const char *outputPath3 = "./anagram/large-answer.txt";
   ans = findAnagrams("./anagram/large.txt");
-  output(outputPath, ans);
+  output(outputPath3, ans);
   
   return 0;
 }
@@ -119,7 +118,7 @@ int calculateScore(string word) {
 }
 
 /** 外部ファイルへの書き出し */
-void output(char *fileName, vector<string> contents) {
+void output(const char *fileName, vector<string> contents) {
   std::ofstream ofs(fileName);
 
   if (!ofs) {
