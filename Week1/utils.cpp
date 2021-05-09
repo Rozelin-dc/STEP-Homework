@@ -1,6 +1,6 @@
 #include "utils.h"
 
-/** 辞書読み込み */
+/** 外部ファイル読み込み */
 vector<string> loadFile(string path) {
   std::ifstream ifs(path);
   if (ifs.fail()) {
@@ -8,9 +8,9 @@ vector<string> loadFile(string path) {
     return {"error"};
   }
   string str;
-  vector<string> dictionary(0);
+  vector<string> contents(0);
   while (std::getline(ifs, str)) {
-    dictionary.push_back(str);
+    contents.push_back(str);
   }
-  return dictionary;
+  return contents;
 }
