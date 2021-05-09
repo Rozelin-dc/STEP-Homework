@@ -50,11 +50,14 @@ vector<string> findAnagrams(string inputPath) {
 
 /** 入力された単語の長さに合わせて新辞書作成 */
 void createNewDictionary(int length) {
+  newDictionary = {};
+  wordsMap = {};
   for (int i = 0; i < (int)dictionary.size(); i++)
   {
-    if ((int)dictionary[i].length() > length) continue;
-
     string str = dictionary[i];
+
+    if ((int)str.length() > length) continue;
+
     newDictionary.push_back({ str });
 
     vector<int> wordMap(26);
