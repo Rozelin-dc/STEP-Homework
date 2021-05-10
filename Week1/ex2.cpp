@@ -3,16 +3,19 @@
 using namespace std;
 
 vector<string> findAnagrams(string inputPath);
-void createNewDictionary(int length);
-vector<string> search(string word);
-bool isSubset(vector<int> inputMap, vector<int> wordMap);
-string findBestAnagram(vector<string> anagrams);
+void filterDictionary(int length);
+string search(string word);
+bool isAnagram(vector<int> inputMap, string word);
 int calculateScore(string word);
 void output(const char *fileName, vector<string> contents);
 
 const vector<string> dictionary = loadFile("./anagram/words.txt");
-vector<string> newDictionary(0);
-vector<vector<int>> wordsMap(0, vector<int>(26));
+
+/** 入力の長さに合わせてフィルターをかけた辞書 */
+vector<string> filteredDictionary(0);
+
+/** ある単語のスコアと、その単語の filteredDictionary でのインデックスを値に持つ */
+vector<vector<int>> wordsMap(0, vector<int>(2));
 
 int main() {
   vector<string> ans;
@@ -35,22 +38,21 @@ int main() {
 /** 入力に合わせたアナグラムを検索 */
 vector<string> findAnagrams(string inputPath) {
   vector<string> inputs = loadFile(inputPath);
-  createNewDictionary(inputs[0].length());
+  filterDictionary(inputs[0].length());
 
   vector<string> ans(0);
 
   for (int i = 0; i < (int)inputs.size(); i++)
   {
-    vector<string> anagrams = search(inputs[i]);
-    string bestAnagram = findBestAnagram(anagrams);
-    ans.push_back(bestAnagram);
+    string anagram = search(inputs[i]);
+    ans.push_back(anagram);
   }
   return ans;
 }
 
-/** 入力された単語の長さに合わせて新辞書作成 */
-void createNewDictionary(int length) {
-  newDictionary = {};
+/** 入力された単語の長さに合わせて辞書をフィルター */
+void filterDictionary(int length) {
+  filteredDictionary = {};
   wordsMap = {};
   for (int i = 0; i < (int)dictionary.size(); i++)
   {
@@ -58,55 +60,45 @@ void createNewDictionary(int length) {
 
     if ((int)str.length() > length) continue;
 
-    newDictionary.push_back({ str });
+    filteredDictionary.push_back({ str });
 
-    vector<int> wordMap(26);
-    for (int i = 0; i < (int)str.length(); i++)
-    {
-      wordMap[str[i] - 'a'] += 1;
-    }
-    wordsMap.push_back(wordMap);
+    int idx = (int)filteredDictionary.size() - 1;
+    int score = calculateScore(str);
+
+    wordsMap.push_back({ score, idx });
   }
+
+  sort(wordsMap.begin(), wordsMap.end(),[](const vector<int> &alpha, const vector<int> &beta){return alpha[0] > beta[0];});
+
   return;
 }
 
-vector<string> search(string word) {
+string search(string word) {
   vector<int> inputMap(26);
   for (int i = 0; i < (int)word.length(); i++)
   {
     inputMap[word[i] - 'a'] += 1;
   }
 
-  vector<string> ans(0);
-
-  for (int i = 0; i < (int)newDictionary.size(); i++)
+  for (int i = 0; i < (int)filteredDictionary.size(); i++)
   {
-    if(isSubset(inputMap, wordsMap[i])) ans.push_back(newDictionary[i]);
+    string str = filteredDictionary[wordsMap[i][1]];
+    if(isAnagram(inputMap, str)) return str;
   }
-  return ans;
+  return "Not Found";
 }
 
-/** 第二引数の配列が第一引数の配列のサブセットになっているか */
-bool isSubset(vector<int> inputMap, vector<int> wordMap) {
-  for (int i = 0; i < 26; i++)
+/** 第二引数の単語が第一引数のアルファベット使用数で表せるか */
+bool isAnagram(vector<int> inputMap, string word) {
+  for (int i = 0; i < (int)word.length(); i++)
   {
-    if(inputMap[i] < wordMap[i]) return false;
+    inputMap[word[i] - 'a'] -= 1;
   }
+  std::sort(inputMap.begin(), inputMap.end());
+
+  if(inputMap[0] < 0) return false;
+
   return true;
-}
-
-/** 見つかったアナグラムの中からベストスコアのものを抽出 */
-string findBestAnagram(vector<string> anagrams) {
-  string ans;
-  int bestScore = 0;
-  for (int i = 0; i < (int)anagrams.size(); i++)
-  {
-    if(calculateScore(anagrams[i]) > bestScore) {
-      ans = anagrams[i];
-      bestScore = calculateScore(anagrams[i]);
-    }
-  }
-  return ans;
 }
 
 /** score_checker.py の calculate_score を移植 */
