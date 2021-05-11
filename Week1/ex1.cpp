@@ -33,6 +33,7 @@ int main() {
 
   for (int i = 0; i < (int)ans.size(); i++)
   {
+    if(ans[i] == input) continue;
     cout<<ans[i]<<endl;
   }
   return 0;
