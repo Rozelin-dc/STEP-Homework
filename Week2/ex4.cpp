@@ -68,7 +68,7 @@ void handleCache(string currentUrl) {
 /** history の整理をする */
 void doHistoryOrganizing() {
   string historyEndUrl = history[history.size()- 1]; // history の末尾のURL
-  while (caches.at(historyEndUrl).count > 1)
+  while (caches.at(historyEndUrl).count >= 2)
   {
     caches.at(historyEndUrl).count -= 1;
     history.pop_back();
