@@ -14,4 +14,6 @@ R(4.0.5)
   - [ex1-report.md](./ex1-report.md)：宿題1の考察
 - 宿題2
   - [ex2-report.md](./ex2-report.md)：宿題2のレポート
+- 宿題3
+  - [ex3-report.md](./ex3-report.md)：宿題3のレポート
 
