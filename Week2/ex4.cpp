@@ -6,7 +6,7 @@ using namespace std;
 void handleCache(string currentUrl);
 void doHistoryOrganizing();
 
-/** Webページと history 中のURLの出現回数を値として持つデータ */
+/** Webページと history 中のURLの出現回数を値として持つ構造体 */
 struct _siteData
 {
   string web;
