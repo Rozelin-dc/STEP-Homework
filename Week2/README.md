@@ -16,4 +16,6 @@ R(4.0.5)
   - [ex2-report.md](./ex2-report.md)：宿題2のレポート
 - 宿題3
   - [ex3-report.md](./ex3-report.md)：宿題3のレポート
+- 宿題4
+  - [ex4.cpp](./ex4.cpp)：宿題4のコード
 
