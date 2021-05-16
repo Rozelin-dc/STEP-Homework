@@ -2,8 +2,8 @@
 using namespace std;
 
 // 行列中に出現する値の最大値と最小値
-#define MIN 0
-#define MAX 100
+#define MIN_MATRIX_COMPONENT 0
+#define MAX_MATRIX_COMPONENT 100
 
 vector<vector<int>> makeMatrix(int size, int seed);
 vector<vector<int>> multMatrixes(int size, vector<vector<int>> a, vector<vector<int>> b);
@@ -47,7 +47,7 @@ int main() {
 vector<vector<int>> makeMatrix(int size, int seed) {
   vector<vector<int>> matrix(size, vector<int>(size));
   std::default_random_engine eng(seed);
-  std::uniform_int_distribution<int> distr(MIN, MAX);
+  std::uniform_int_distribution<int> distr(MIN_MATRIX_COMPONENT, MAX_MATRIX_COMPONENT);
 
   for (int i = 0; i < size; i++)
   {

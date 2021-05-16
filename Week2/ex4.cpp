@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX 5 // 保存できるキャッシュの最大数
+#define MAX_CACHE_SIZE 5 // 保存できるキャッシュの最大数
 
 void handleCache(string currentUrl);
 void doHistoryOrganizing();
@@ -47,7 +47,7 @@ void handleCache(string currentUrl) {
     doHistoryOrganizing();
     return;
   } else { // currentUrl が caches に含まれていない場合
-    if(caches.size() < MAX) { // 保存できるキャッシュにまだ余裕がある時
+    if(caches.size() < MAX_CACHE_SIZE) { // 保存できるキャッシュにまだ余裕がある時
       history.push_front(currentUrl);
       caches[currentUrl] = (siteData_t){ currentUrl, 1 };
       return;
