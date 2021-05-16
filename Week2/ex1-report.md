@@ -1,6 +1,8 @@
 ## 概要
 
-[ex1.cpp](./ex1.cpp) では、`multMatrixes` にかかる時間を計測し、[ex1-result.csv](./ex1-result.csv) に結果を出力している。`Time` の単位は `sec` である。
+[ex1.cpp](./ex1.cpp) では、行列のサイズ`n`を入力として受け取り、`makeMatrix`でn×n行列をランダムに生成。その後`multMatrixes`で生成した2つの行列の掛け算を行っている。[ex1-result.csv](./ex1-result.csv) には、`multMatrixes`にかかる時間を計測し、結果を出力している。`Time` の単位は `sec` である。
+
+`makeMatrix`で生成される行列の各成分は整数値で、その上限と下限はそれぞれプログラム冒頭の`MIN_MATRIX_COMPONENT`, `MAX_MATRIX_COMPONENT`で定義されている。
 
 ## 考察
 
