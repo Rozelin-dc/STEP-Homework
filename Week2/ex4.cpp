@@ -27,11 +27,12 @@ int main() {
     cin>>currentUrl;
     handleCache(currentUrl);
 
-    /* デバッグ用出力
+    // デバッグ用出力
     for (int i = 0; i < (int)history.size(); i++)
     {
       cout<<caches[history[i]].web<<","<<caches[history[i]].count<<endl;
-    } */
+    }
+    cout<<endl;
   }
 }
 
