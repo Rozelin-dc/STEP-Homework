@@ -95,92 +95,85 @@ unordered_map<string, siteData_t> Cache::getCaches() {
 void test() {
   Cache cache;
 
+  unordered_map<string, siteData_t> expectedCaches = {};
+
   if(cache.getHistory() != (deque<string>){}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){}) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("a");
+  expectedCaches = {{"a", (siteData_t){"a", 1}}};
   if(cache.getHistory() != (deque<string>){"a"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}}
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("b");
+  expectedCaches = {
+    {"a", (siteData_t){"a", 1}},
+    {"b", (siteData_t){"b", 1}}
+  };
   if(cache.getHistory() != (deque<string>){"b", "a"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"a", (siteData_t){"a", 1}},
-      {"b", (siteData_t){"b", 1}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("b");
+  expectedCaches = {
+    {"a", (siteData_t){"a", 1}},
+    {"b", (siteData_t){"b", 1}}
+  };
   if(cache.getHistory() != (deque<string>){"b", "a"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"a", (siteData_t){"a", 1}},
-      {"b", (siteData_t){"b", 1}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("c");
+  expectedCaches = {
+    {"a", (siteData_t){"a", 1}},
+    {"b", (siteData_t){"b", 1}},
+    {"c", (siteData_t){"c", 1}}
+  };
   if(cache.getHistory() != (deque<string>){"c", "b", "a"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"a", (siteData_t){"a", 1}},
-      {"b", (siteData_t){"b", 1}},
-      {"c", (siteData_t){"c", 1}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("d");
+  expectedCaches = {
+    {"d", (siteData_t){"d", 1}},
+    {"b", (siteData_t){"b", 1}},
+    {"c", (siteData_t){"c", 1}}
+  };
   if(cache.getHistory() != (deque<string>){"d", "c", "b"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"d", (siteData_t){"d", 1}},
-      {"b", (siteData_t){"b", 1}},
-      {"c", (siteData_t){"c", 1}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("c");
+  expectedCaches = {
+    {"d", (siteData_t){"d", 1}},
+    {"b", (siteData_t){"b", 1}},
+    {"c", (siteData_t){"c", 2}}
+  };
   if(cache.getHistory() != (deque<string>){"c", "d", "c", "b"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"d", (siteData_t){"d", 1}},
-      {"b", (siteData_t){"b", 1}},
-      {"c", (siteData_t){"c", 2}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("d");
+  expectedCaches = {
+    {"d", (siteData_t){"d", 2}},
+    {"b", (siteData_t){"b", 1}},
+    {"c", (siteData_t){"c", 2}}
+  };
   if(cache.getHistory() != (deque<string>){"d", "c", "d", "c", "b"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"d", (siteData_t){"d", 2}},
-      {"b", (siteData_t){"b", 1}},
-      {"c", (siteData_t){"c", 2}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("a");
+  expectedCaches = {
+    {"d", (siteData_t){"d", 2}},
+    {"a", (siteData_t){"b", 1}},
+    {"c", (siteData_t){"c", 2}}
+  };
   if(cache.getHistory() != (deque<string>){"a", "d", "c", "d", "c"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"d", (siteData_t){"d", 2}},
-      {"a", (siteData_t){"b", 1}},
-      {"c", (siteData_t){"c", 2}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("a");
+  expectedCaches = {
+    {"d", (siteData_t){"d", 1}},
+    {"a", (siteData_t){"b", 1}},
+    {"c", (siteData_t){"c", 1}}
+  };
   if(cache.getHistory() != (deque<string>){"a", "d", "c"}) return;
-  if(cache.getCaches() !=
-    (unordered_map<string, siteData_t>){
-      {"d", (siteData_t){"d", 1}},
-      {"a", (siteData_t){"b", 1}},
-      {"c", (siteData_t){"c", 1}}
-    }
-  ) return;
+  if(cache.getCaches() != expectedCaches) return;
 
   cout<<"OK"<<endl;
   return;
