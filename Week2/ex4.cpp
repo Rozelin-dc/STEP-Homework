@@ -100,39 +100,87 @@ void test() {
 
   cache.handleCache("a");
   if(cache.getHistory() != (deque<string>){"a"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}}
+  ) return;
 
   cache.handleCache("b");
   if(cache.getHistory() != (deque<string>){"b", "a"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}, {"b", (siteData_t){"b", 1}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"a", (siteData_t){"a", 1}},
+      {"b", (siteData_t){"b", 1}}
+    }
+  ) return;
 
   cache.handleCache("b");
   if(cache.getHistory() != (deque<string>){"b", "a"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}, {"b", (siteData_t){"b", 1}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"a", (siteData_t){"a", 1}},
+      {"b", (siteData_t){"b", 1}}
+    }
+  ) return;
 
   cache.handleCache("c");
   if(cache.getHistory() != (deque<string>){"c", "b", "a"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 1}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"a", (siteData_t){"a", 1}},
+      {"b", (siteData_t){"b", 1}},
+      {"c", (siteData_t){"c", 1}}
+    }
+  ) return;
 
   cache.handleCache("d");
   if(cache.getHistory() != (deque<string>){"d", "c", "b"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 1}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 1}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"d", (siteData_t){"d", 1}},
+      {"b", (siteData_t){"b", 1}},
+      {"c", (siteData_t){"c", 1}}
+    }
+  ) return;
 
   cache.handleCache("c");
   if(cache.getHistory() != (deque<string>){"c", "d", "c", "b"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 1}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 2}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"d", (siteData_t){"d", 1}},
+      {"b", (siteData_t){"b", 1}},
+      {"c", (siteData_t){"c", 2}}
+    }
+  ) return;
 
   cache.handleCache("d");
   if(cache.getHistory() != (deque<string>){"d", "c", "d", "c", "b"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 2}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 2}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"d", (siteData_t){"d", 2}},
+      {"b", (siteData_t){"b", 1}},
+      {"c", (siteData_t){"c", 2}}
+    }
+  ) return;
 
   cache.handleCache("a");
   if(cache.getHistory() != (deque<string>){"a", "d", "c", "d", "c"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 2}}, {"a", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 2}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"d", (siteData_t){"d", 2}},
+      {"a", (siteData_t){"b", 1}},
+      {"c", (siteData_t){"c", 2}}
+    }
+  ) return;
 
   cache.handleCache("a");
   if(cache.getHistory() != (deque<string>){"a", "d", "c"}) return;
-  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 1}}, {"a", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 1}}}) return;
+  if(cache.getCaches() !=
+    (unordered_map<string, siteData_t>){
+      {"d", (siteData_t){"d", 1}},
+      {"a", (siteData_t){"b", 1}},
+      {"c", (siteData_t){"c", 1}}
+    }
+  ) return;
 
   cout<<"OK"<<endl;
   return;
