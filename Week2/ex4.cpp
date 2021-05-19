@@ -3,9 +3,6 @@ using namespace std;
 
 #define MAX_CACHE_SIZE 5 // 保存できるキャッシュの最大数
 
-void handleCache(string currentUrl);
-void doHistoryOrganizing();
-
 /** Webページと history 中のURLの出現回数を値として持つ構造体 */
 struct _siteData
 {
@@ -14,29 +11,30 @@ struct _siteData
 };
 typedef struct _siteData siteData_t;
 
-std::deque<string> history; // 先頭に行くほど最近に訪れたURLが保存されている配列
-std::unordered_map<string, siteData_t> caches; // URLをキー、siteData を値に持つハッシュテーブル
+class Cache
+{
+  std::deque<string> history; // 先頭に行くほど最近に訪れたURLが保存されている配列
+  std::unordered_map<string, siteData_t> caches; // URLをキー、siteData を値に持つハッシュテーブル
+  void doHistoryOrganizing();
+  public:
+    void handleCache(string currentUrl);
+};
 
 int main() {
   int n;
   cin>>n;
 
+  Cache cache;
+
   string currentUrl; // 新しく訪れたURL
 
   for (int i = 0; i < n; i++) {
     cin>>currentUrl;
-    handleCache(currentUrl);
-
-    // デバッグ用出力
-    for (int i = 0; i < (int)history.size(); i++)
-    {
-      cout<<caches[history[i]].web<<","<<caches[history[i]].count<<endl;
-    }
-    cout<<endl;
+    cache.handleCache(currentUrl);
   }
 }
 
-void handleCache(string currentUrl) {
+void Cache::handleCache(string currentUrl) {
   // currentUrl が caches に含まれるか検索
   auto itr = caches.find(currentUrl);
   if (itr != caches.end()) { // currentUrl が caches に含まれていた場合
@@ -67,7 +65,7 @@ void handleCache(string currentUrl) {
 }
 
 /** history の整理をする */
-void doHistoryOrganizing() {
+void Cache::doHistoryOrganizing() {
   string historyEndUrl = history[history.size()- 1]; // history の末尾のURL
   while (caches.at(historyEndUrl).count >= 2)
   {
