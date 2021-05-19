@@ -36,10 +36,12 @@ int main() {
   std::ofstream ofs(fileName, ios::app);
 
   if (!ofs) {
-    cout<< "ファイルが開けませんでした。" <<endl;
+    cout<<"ファイルが開けませんでした。"<<endl;
     return 1;
   }
   ofs<<n<<","<<(double)(end - start) / CLOCKS_PER_SEC<<endl;
+  ofs.close();
+
   return 0;
 }
 
