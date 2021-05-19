@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_CACHE_SIZE 5 // 保存できるキャッシュの最大数
+#define MAX_CACHE_SIZE 3 // 保存できるキャッシュの最大数
 
 /** Webページと history 中のURLの出現回数を値として持つ構造体 */
 struct _siteData
@@ -13,15 +13,20 @@ typedef struct _siteData siteData_t;
 
 class Cache
 {
-  std::deque<string> history; // 先頭に行くほど最近に訪れたURLが保存されている配列
-  std::unordered_map<string, siteData_t> caches; // URLをキー、siteData を値に持つハッシュテーブル
+  deque<string> history; // 先頭に行くほど最近に訪れたURLが保存されている配列
+  unordered_map<string, siteData_t> caches; // URLをキー、siteData を値に持つハッシュテーブル
   void doHistoryOrganizing();
   public:
     void handleCache(string currentUrl);
+    deque<string> getHistory();
+    unordered_map<string, siteData_t> getCaches();
 };
 
+void test();
+
 int main() {
-  int n;
+  test();
+  /* int n;
   cin>>n;
 
   Cache cache;
@@ -31,14 +36,17 @@ int main() {
   for (int i = 0; i < n; i++) {
     cin>>currentUrl;
     cache.handleCache(currentUrl);
-  }
+  } */
 }
 
 void Cache::handleCache(string currentUrl) {
   // currentUrl が caches に含まれるか検索
   auto itr = caches.find(currentUrl);
   if (itr != caches.end()) { // currentUrl が caches に含まれていた場合
-    if(history[0] == currentUrl) return;
+    if(history[0] == currentUrl) {
+      doHistoryOrganizing();
+      return;
+    }
 
     history.push_front(currentUrl);
     caches.at(currentUrl).count += 1;
@@ -73,5 +81,59 @@ void Cache::doHistoryOrganizing() {
     history.pop_back();
     historyEndUrl = history[history.size() - 1];
   }
+  return;
+}
+
+deque<string> Cache::getHistory() {
+  return history;
+}
+
+unordered_map<string, siteData_t> Cache::getCaches() {
+  return caches;
+}
+
+void test() {
+  Cache cache;
+
+  if(cache.getHistory() != (deque<string>){}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){}) return;
+
+  cache.handleCache("a");
+  if(cache.getHistory() != (deque<string>){"a"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}}) return;
+
+  cache.handleCache("b");
+  if(cache.getHistory() != (deque<string>){"b", "a"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}, {"b", (siteData_t){"b", 1}}}) return;
+
+  cache.handleCache("b");
+  if(cache.getHistory() != (deque<string>){"b", "a"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}, {"b", (siteData_t){"b", 1}}}) return;
+
+  cache.handleCache("c");
+  if(cache.getHistory() != (deque<string>){"c", "b", "a"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"a", (siteData_t){"a", 1}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 1}}}) return;
+
+  cache.handleCache("d");
+  if(cache.getHistory() != (deque<string>){"d", "c", "b"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 1}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 1}}}) return;
+
+  cache.handleCache("c");
+  if(cache.getHistory() != (deque<string>){"c", "d", "c", "b"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 1}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 2}}}) return;
+
+  cache.handleCache("d");
+  if(cache.getHistory() != (deque<string>){"d", "c", "d", "c", "b"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 2}}, {"b", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 2}}}) return;
+
+  cache.handleCache("a");
+  if(cache.getHistory() != (deque<string>){"a", "d", "c", "d", "c"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 2}}, {"a", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 2}}}) return;
+
+  cache.handleCache("a");
+  if(cache.getHistory() != (deque<string>){"a", "d", "c"}) return;
+  if(cache.getCaches() != (unordered_map<string, siteData_t>){{"d", (siteData_t){"d", 1}}, {"a", (siteData_t){"b", 1}}, {"c", (siteData_t){"c", 1}}}) return;
+
+  cout<<"OK"<<endl;
   return;
 }
