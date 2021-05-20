@@ -153,7 +153,7 @@ void test() {
   cache.handleCache("a");
   expectedCaches = {
     {"d", make_pair("d", 2)},
-    {"a", make_pair("b", 1)},
+    {"a", make_pair("a", 1)},
     {"c", make_pair("c", 2)}
   };
   if(cache.getHistory() != (deque<string>){"a", "d", "c", "d", "c"}) return;
@@ -162,7 +162,7 @@ void test() {
   cache.handleCache("a");
   expectedCaches = {
     {"d", make_pair("d", 1)},
-    {"a", make_pair("b", 1)},
+    {"a", make_pair("a", 1)},
     {"c", make_pair("c", 1)}
   };
   if(cache.getHistory() != (deque<string>){"a", "d", "c"}) return;
