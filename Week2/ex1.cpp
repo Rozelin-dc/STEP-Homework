@@ -7,9 +7,11 @@ using namespace std;
 
 vector<vector<int>> makeMatrix(int size, int seed);
 vector<vector<int>> multMatrixes(int size, vector<vector<int>> a, vector<vector<int>> b);
-void printMatrix(int size, vector<vector<int>> output);
+void test();
 
 int main() {
+  test();
+
   int n;
   cin>>n;
 
@@ -23,13 +25,6 @@ int main() {
   vector<vector<int>> ans = multMatrixes(n, a, b);
 
   clock_t end = clock(); // 計測終了
-
-  // デバッグ用出力
-  // printMatrix(n, a);
-  // cout<<endl;
-  // printMatrix(n, b);
-  // cout<<endl;
-  // printMatrix(n, ans);
 
   // 結果を外部ファイルに出力
   const char fileName[] = "ex1-result.csv";
@@ -77,15 +72,40 @@ vector<vector<int>> multMatrixes(int size, vector<vector<int>> a, vector<vector<
   return ans;
 }
 
-/** 行列を出力 */
-void printMatrix(int size, vector<vector<int>> output) {
-  for (int i = 0; i < size; i++)
-  {
-    for (int j = 0; j < size; j++)
-    {
-      cout<<output[i][j]<<" ";
-    }
-    cout<<endl;
-  }
+void test() {
+  vector<vector<int>> a = {
+    {1, 2},
+    {3, 4}
+  };
+  vector<vector<int>> b = {
+    {5, 6},
+    {7, 8}
+  };
+  vector<vector<int>> ans = {
+    {19, 22},
+    {43, 50}
+  };
+  vector<vector<int>> result = multMatrixes(2, a, b);
+  if(result != ans) return;
+
+  a = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+  };
+  b = {
+    {10, 11, 12},
+    {13, 14, 15},
+    {16, 17, 18}
+  };
+  ans = {
+    {84, 90, 96},
+    {201, 216, 231},
+    {318, 342, 366}
+  };
+  result = multMatrixes(3, a, b);
+  if(result != ans) return;
+
+  cout<<"OK"<<endl;
   return;
 }
