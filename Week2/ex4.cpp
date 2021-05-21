@@ -19,7 +19,7 @@ void test();
 
 int main() {
   test();
-  /* int n;
+  int n;
   cin>>n;
 
   Cache cache;
@@ -29,7 +29,7 @@ int main() {
   for (int i = 0; i < n; i++) {
     cin>>currentUrl;
     cache.handleCache(currentUrl);
-  } */
+  }
 }
 
 void Cache::handleCache(string currentUrl) {
