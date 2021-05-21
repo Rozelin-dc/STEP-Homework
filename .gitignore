@@ -1,6 +1,7 @@
 .vscode
 .vs
 anagram
+test
 
 # Prerequisites
 *.d
