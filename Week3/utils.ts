@@ -5,7 +5,7 @@ export const tokenize = (input: string, readOperator: (input: string, idx: numbe
   let tokens: Token[] = ['+'] // ダミーの + を挿入
   let index = 0
   while (index < input.length) {
-    if (!Number.isNaN(input[index])) {
+    if (!isNaN(+input[index])) {
       const { token, idx } = readNumber(input, index)
       tokens.push(token)
       index = idx
@@ -22,7 +22,7 @@ export const tokenize = (input: string, readOperator: (input: string, idx: numbe
 /** 数字読み込み */
 const readNumber = (input: string, idx: number) => {
   let num = 0
-  while (idx < input.length && !Number.isNaN(input[idx])) {
+  while (idx < input.length && !isNaN(+input[idx])) {
     num = num * 10 + +input[idx]
     idx += 1
   }
