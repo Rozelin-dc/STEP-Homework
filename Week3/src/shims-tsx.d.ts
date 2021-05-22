@@ -1,4 +1,4 @@
-import Vue, { VNode } from "vue";
+import Vue, { VNode } from 'vue'
 
 declare global {
   namespace JSX {
@@ -7,7 +7,7 @@ declare global {
     // tslint:disable no-empty-interface
     type ElementClass = Vue
     interface IntrinsicElements {
-      [elem: string]: any;
+      [elem: string]: any
     }
   }
 }

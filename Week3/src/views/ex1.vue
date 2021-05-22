@@ -12,8 +12,8 @@ import { mainEx1 } from '@/scripts/ex1'
 @Component({
   name: 'Ex1',
   components: {
-    ExComponent
-  }
+    ExComponent,
+  },
 })
 export default class extends Vue {
   runEx1 = mainEx1

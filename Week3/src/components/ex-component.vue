@@ -8,16 +8,18 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-property-decorator";
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component({
-  name: "ExComponent",
+  name: 'ExComponent',
 })
 export default class extends Vue {
-  @Prop({ required: true, type: String }) title!: string;
-  @Prop({ required: true, type: Function }) calculate!: (input: string) => number | 'error';
+  @Prop({ required: true, type: String }) title!: string
+  @Prop({ required: true, type: Function }) calculate!: (
+    input: string
+  ) => number | 'error'
 
-  input = "";
-  result: string | number = "";
+  input = ''
+  result: string | number = ''
 }
 </script>

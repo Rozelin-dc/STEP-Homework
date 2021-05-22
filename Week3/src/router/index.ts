@@ -22,8 +22,8 @@ const routes: Array<RouteConfig> = [
   {
     path: '/ex1',
     name: 'Ex1',
-    component: () => import('../views/ex1.vue')
-  }
+    component: () => import('../views/ex1.vue'),
+  },
 ]
 
 const router = new VueRouter({

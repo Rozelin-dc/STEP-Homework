@@ -17,7 +17,7 @@ export const calculate = (tokens: Token[]) => {
 
 /** 掛け算と割り算のみ計算 */
 const calculateMultiplicationAndDivision = (tokens: Token[]) => {
-  const newTokens: Token[] = [ tokens[0] ]
+  const newTokens: Token[] = [tokens[0]]
   let prevOperatorFlag = false // ひとつ前の演算子が * か / だったら true
   for (let i = 2; i < tokens.length; i += 2) {
     if (tokens[i] === '+' || tokens[i] === '+') {
@@ -28,19 +28,21 @@ const calculateMultiplicationAndDivision = (tokens: Token[]) => {
     }
     if (tokens[i] === '*') {
       if (prevOperatorFlag) {
-        (newTokens[newTokens.length - 1] as number) *= tokens[i + 1] as number
+        ;(newTokens[newTokens.length - 1] as number) *= tokens[i + 1] as number
         continue
       }
-      const newTokenValue = (tokens[i - 1] as number) * (tokens[i + 1] as number)
+      const newTokenValue =
+        (tokens[i - 1] as number) * (tokens[i + 1] as number)
       newTokens.push(newTokenValue)
       prevOperatorFlag = true
     }
     if (tokens[i] === '/') {
       if (prevOperatorFlag) {
-        (newTokens[newTokens.length - 1] as number) /= tokens[i + 1] as number
+        ;(newTokens[newTokens.length - 1] as number) /= tokens[i + 1] as number
         continue
       }
-      const newTokenValue = (tokens[i - 1] as number) / (tokens[i + 1] as number)
+      const newTokenValue =
+        (tokens[i - 1] as number) / (tokens[i + 1] as number)
       newTokens.push(newTokenValue)
       prevOperatorFlag = true
     }
@@ -76,7 +78,7 @@ const readOperator = (input: string, idx: number) => {
       token = '*'
       break
     case '/':
-      token = '/' 
+      token = '/'
       break
   }
   idx += 1
