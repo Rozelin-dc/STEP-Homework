@@ -2,7 +2,7 @@
   <div>
     <h2>{{ title }}</h2>
     <input v-model="input" />
-    <button @click="result = calculate(input)">計算</button>
+    <button @click="result = calculate(input.trim())">計算</button>
     <span>結果: {{ result }}</span>
   </div>
 </template>

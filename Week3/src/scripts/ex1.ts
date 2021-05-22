@@ -17,34 +17,20 @@ export const calculate = (tokens: Token[]) => {
 
 /** 掛け算と割り算のみ計算 */
 const calculateMultiplicationAndDivision = (tokens: Token[]) => {
-  const newTokens: Token[] = [tokens[0]]
-  let prevOperatorFlag = false // ひとつ前の演算子が * か / だったら true
+  const newTokens: Token[] = tokens.slice(0, 2)
   for (let i = 2; i < tokens.length; i += 2) {
     if (tokens[i] === '+' || tokens[i] === '+') {
-      if (!prevOperatorFlag) newTokens.push(tokens[i - 1])
       newTokens.push(tokens[i])
-      prevOperatorFlag = false
+      newTokens.push(tokens[i + 1])
       continue
     }
     if (tokens[i] === '*') {
-      if (prevOperatorFlag) {
-        ;(newTokens[newTokens.length - 1] as number) *= tokens[i + 1] as number
-        continue
-      }
-      const newTokenValue =
-        (tokens[i - 1] as number) * (tokens[i + 1] as number)
-      newTokens.push(newTokenValue)
-      prevOperatorFlag = true
+      const newTokenValue = +newTokens[newTokens.length - 1]
+      newTokens[newTokens.length - 1] = newTokenValue * +tokens[i + 1]
     }
     if (tokens[i] === '/') {
-      if (prevOperatorFlag) {
-        ;(newTokens[newTokens.length - 1] as number) /= tokens[i + 1] as number
-        continue
-      }
-      const newTokenValue =
-        (tokens[i - 1] as number) / (tokens[i + 1] as number)
-      newTokens.push(newTokenValue)
-      prevOperatorFlag = true
+      const newTokenValue = +newTokens[newTokens.length - 1]
+      newTokens[newTokens.length - 1] = newTokenValue / +tokens[i + 1]
     }
   }
   return newTokens
@@ -55,10 +41,10 @@ const calculateAdditionAndSubtraction = (tokens: Token[]) => {
   let ans = 0
   for (let i = 0; i < tokens.length; i += 2) {
     if (tokens[i] === '+') {
-      ans += tokens[i + 1] as number
+      ans += +tokens[i + 1]
     }
     if (tokens[i] === '-') {
-      ans -= tokens[i + 1] as number
+      ans -= +tokens[i + 1]
     }
   }
   return ans
