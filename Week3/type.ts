@@ -1,6 +1,3 @@
 export type Operator = '+' | '-' | '*' | '/' | '(' | ')'
 
-export interface Token {
-  type: 'number' | 'operator',
-  value: number | Operator
-}
+export type Token = number | Operator

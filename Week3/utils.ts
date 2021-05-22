@@ -2,7 +2,7 @@ import { Token } from './type'
 
 /** 入力を Token 型の配列に変換 */
 export const tokenize = (input: string, readOperator: (input: string, idx: number) => {token: Token | null, idx: number}) => {
-  let tokens: Token[] = [{ type: 'operator', value: '+' }] // ダミーの + を挿入
+  let tokens: Token[] = ['+'] // ダミーの + を挿入
   let index = 0
   while (index < input.length) {
     if (!Number.isNaN(input[index])) {
@@ -35,6 +35,6 @@ const readNumber = (input: string, idx: number) => {
       idx += 1
     }
   }
-  const token: Token = { type: 'number', value: num }
+  const token = num
   return { token, idx }
 }
