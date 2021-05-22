@@ -19,7 +19,7 @@ export const calculate = (tokens: Token[]) => {
 const calculateMultiplicationAndDivision = (tokens: Token[]) => {
   const newTokens: Token[] = tokens.slice(0, 2)
   for (let i = 2; i < tokens.length; i += 2) {
-    if (tokens[i] === '+' || tokens[i] === '+') {
+    if (tokens[i] === '+' || tokens[i] === '-') {
       newTokens.push(tokens[i])
       newTokens.push(tokens[i + 1])
       continue

@@ -1,12 +1,12 @@
 <template>
   <div>
     <h2>{{ title }}</h2>
-    {{ validInputExplanation }}
+    <div>{{ validInputExplanation }}</div>
     <input v-model="input" />
     <br />
     <button @click="result = calculate(input.trim())">計算</button>
     <button @click="result = test()">テスト</button>
-    <span>結果: {{ result }}</span>
+    <div>結果: {{ result }}</div>
   </div>
 </template>
 
