@@ -2,7 +2,7 @@ import { Token } from './type'
 
 /** 入力を Token 型の配列に変換 */
 export const tokenize = (input: string, readOperator: (input: string, idx: number) => {token: Token | null, idx: number}) => {
-  let tokens: Token[] = ['+'] // ダミーの + を挿入
+  const tokens: Token[] = ['+'] // ダミーの + を挿入
   let index = 0
   while (index < input.length) {
     if (!isNaN(+input[index])) {

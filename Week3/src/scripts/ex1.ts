@@ -1,7 +1,7 @@
 import { Token } from './type'
 import * as utils from './utils'
 
-export const main_ex1 = (input: string) => {
+export const mainEx1 = (input: string) => {
   const tokens = utils.tokenize(input.trim(), readOperator)
   if (tokens === null) return 'error'
   const ans = calculate(tokens)
@@ -17,7 +17,7 @@ export const calculate = (tokens: Token[]) => {
 
 /** 掛け算と割り算のみ計算 */
 const calculateMultiplicationAndDivision = (tokens: Token[]) => {
-  let newTokens: Token[] = [ tokens[0] ]
+  const newTokens: Token[] = [ tokens[0] ]
   let prevOperatorFlag = false // ひとつ前の演算子が * か / だったら true
   for (let i = 2; i < tokens.length; i += 2) {
     if (tokens[i] === '+' || tokens[i] === '+') {
