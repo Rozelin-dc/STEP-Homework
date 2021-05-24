@@ -122,50 +122,22 @@ void test() {
   if(cache.getHistory() != (deque<string>){"c", "b", "a"}) return;
   if(cache.getCaches() != expectedCaches) return;
 
-  cache.handleCache("d");
+  cache.handleCache("a");
   expectedCaches = {
-    {"d", make_pair("d", 1)},
+    {"a", make_pair("a", 1)},
     {"b", make_pair("b", 1)},
     {"c", make_pair("c", 1)}
   };
-  if(cache.getHistory() != (deque<string>){"d", "c", "b"}) return;
-  if(cache.getCaches() != expectedCaches) return;
-
-  cache.handleCache("c");
-  expectedCaches = {
-    {"d", make_pair("d", 1)},
-    {"b", make_pair("b", 1)},
-    {"c", make_pair("c", 2)}
-  };
-  if(cache.getHistory() != (deque<string>){"c", "d", "c", "b"}) return;
+  if(cache.getHistory() != (deque<string>){"a", "c", "b"}) return;
   if(cache.getCaches() != expectedCaches) return;
 
   cache.handleCache("d");
   expectedCaches = {
-    {"d", make_pair("d", 2)},
-    {"b", make_pair("b", 1)},
-    {"c", make_pair("c", 2)}
-  };
-  if(cache.getHistory() != (deque<string>){"d", "c", "d", "c", "b"}) return;
-  if(cache.getCaches() != expectedCaches) return;
-
-  cache.handleCache("a");
-  expectedCaches = {
-    {"d", make_pair("d", 2)},
     {"a", make_pair("a", 1)},
-    {"c", make_pair("c", 2)}
-  };
-  if(cache.getHistory() != (deque<string>){"a", "d", "c", "d", "c"}) return;
-  if(cache.getCaches() != expectedCaches) return;
-
-  cache.handleCache("a");
-  expectedCaches = {
     {"d", make_pair("d", 1)},
-    {"a", make_pair("a", 1)},
     {"c", make_pair("c", 1)}
   };
-  if(cache.getHistory() != (deque<string>){"a", "d", "c"}) return;
-  if(cache.getCaches() != expectedCaches) return;
+  if(cache.getHistory() != (deque<string>){"d", "a", "c"}) return;
 
   std::cout<<"OK"<<endl;
   return;
