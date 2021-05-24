@@ -8,7 +8,7 @@ class Cache
 {
   deque<string> history; // 先頭に行くほど最近に訪れたURLが保存されている配列
   unordered_map<string, pair<string, int>> caches; // URLをキー first: Webページ, second: history 中の出現回数 の pair を値に持つハッシュテーブル
-  void doHistoryOrganizing();
+  void removeUnnecessaryHistory();
   public:
     void handleCache(string currentUrl);
     deque<string> getHistory();
@@ -37,14 +37,14 @@ void Cache::handleCache(string currentUrl) {
   auto itr = caches.find(currentUrl);
   if (itr != caches.end()) { // currentUrl が caches に含まれていた場合
     if(history[0] == currentUrl) {
-      doHistoryOrganizing();
+      removeUnnecessaryHistory();
       return;
     }
 
     history.push_front(currentUrl);
     caches.at(currentUrl).second += 1;
 
-    doHistoryOrganizing();
+    removeUnnecessaryHistory();
     return;
   } else { // currentUrl が caches に含まれていない場合
     if(caches.size() < MAX_CACHE_SIZE) { // 保存できるキャッシュにまだ余裕がある時
@@ -53,7 +53,7 @@ void Cache::handleCache(string currentUrl) {
       return;
     }
 
-    doHistoryOrganizing();
+    removeUnnecessaryHistory();
     string historyEndUrl = history[history.size()- 1]; // history の末尾のURL
     caches.erase(historyEndUrl); // キャッシュ消去
     history.pop_back(); // history の末尾削除
@@ -66,7 +66,7 @@ void Cache::handleCache(string currentUrl) {
 }
 
 /** history の整理をする */
-void Cache::doHistoryOrganizing() {
+void Cache::removeUnnecessaryHistory() {
   string historyEndUrl = history[history.size()- 1]; // history の末尾のURL
   while (caches.at(historyEndUrl).second >= 2)
   {
