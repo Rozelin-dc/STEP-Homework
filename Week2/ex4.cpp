@@ -3,7 +3,6 @@ using namespace std;
 
 #define MAX_CACHE_SIZE 3 // 保存できるキャッシュの最大数
 
-
 class Cache
 {
   deque<string> history; // 先頭に行くほど最近に訪れたURLが保存されている配列
