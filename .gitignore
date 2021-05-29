@@ -2,6 +2,7 @@
 .vs
 anagram
 test
+wikipedia_data
 
 # Prerequisites
 *.d
