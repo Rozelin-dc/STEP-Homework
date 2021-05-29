@@ -5,7 +5,7 @@ using namespace std;
 struct _pageData
 {
   string name;
-  vector<string> linkedPages;
+  deque<string> linkedPages;
 };
 typedef struct _pageData pageData_t;
 
