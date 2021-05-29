@@ -6,8 +6,8 @@ deque<string> findSortestPath(unordered_map<string, pageData_t> links, string st
 string findTargetId(unordered_map<string, pageData_t> links, string targetName);
 
 int main() {
-  unordered_map<string, pageData_t> links = readData(); // ãƒšãƒ¼ã‚¸ã® id ã‚’ã‚­ãƒ¼ã€åå‰ã¨ãƒªãƒ³ã‚¯å…ˆã‚’å€¤ã¨ã—ã¦æŒã¤ãƒ‡ãƒ¼ã‚¿
-  deque<string> foundPath = findSortestPath(links, "Google", "ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿");
+  unordered_map<string, pageData_t> links = readData(); // ƒy[ƒW‚Ì id ‚ğƒL[A–¼‘O‚ÆƒŠƒ“ƒNæ‚ğ’l‚Æ‚µ‚Ä‚Âƒf[ƒ^
+  deque<string> foundPath = findSortestPath(links, "Google", "ƒRƒ“ƒsƒ…[ƒ^");
   deque<string> emptyDeque = {};
   if (foundPath == emptyDeque) {
     cout<<"Not Found"<<endl;
@@ -22,15 +22,15 @@ int main() {
   return 0;
 }
 
-/** links å†…ã« start ã¨ end ã‚’ç¹‹ã’ã‚‹ãƒ‘ã‚¹ãŒã‚ã‚‹ã‹æ¢ã—ã€è¦‹ã¤ã‹ã£ãŸã‚‰æœ€çŸ­çµŒè·¯ã®ãƒ‘ã‚¹ã‚’è¿”ã™ */
+/** links “à‚É start ‚Æ end ‚ğŒq‚°‚éƒpƒX‚ª‚ ‚é‚©’T‚µAŒ©‚Â‚©‚Á‚½‚çÅ’ZŒo˜H‚ÌƒpƒX‚ğ•Ô‚· */
 deque<string> findSortestPath(unordered_map<string, pageData_t> links, string start, string end) {
   if (start == end) return {start};
 
   string startId = findTargetId(links, start);
   if (startId == "Not Found") return {};
 
-  unordered_map<string, string> visitedPages = {}; // è¨ªã‚ŒãŸãƒšãƒ¼ã‚¸ã‚’ã‚­ãƒ¼ã€ã©ã®ãƒšãƒ¼ã‚¸ã‹ã‚‰æ¥ãŸã‹ã‚’å€¤ã¨ã—ã¦æŒã¤
-  deque<string> queue = {startId}; // ãƒšãƒ¼ã‚¸ã® id ãŒä¿å­˜ã•ã‚Œã¦ã„ã‚‹ã‚­ãƒ¥ãƒ¼
+  unordered_map<string, string> visitedPages = {}; // –K‚ê‚½ƒy[ƒW‚ğƒL[A‚Ç‚Ìƒy[ƒW‚©‚ç—ˆ‚½‚©‚ğ’l‚Æ‚µ‚Ä‚Â
+  deque<string> queue = {startId}; // ƒy[ƒW‚Ì id ‚ª•Û‘¶‚³‚ê‚Ä‚¢‚éƒLƒ…[
   bool found = false;
   while (queue.size() > 0)
   {
@@ -43,7 +43,7 @@ deque<string> findSortestPath(unordered_map<string, pageData_t> links, string st
       string linkedPageId = links.at(queue[0]).linkedPages[i];
       string linkedPageName = links.at(linkedPageId).name;
       auto itr = visitedPages.find(linkedPageName);
-      if (itr == visitedPages.end()) { // ã‚­ãƒ¥ãƒ¼ã®ãƒªãƒ³ã‚¯å…ˆãŒã¾ã è¨ªã‚Œã¦ã„ãªã„ãƒšãƒ¼ã‚¸ã ã£ãŸã‚‰
+      if (itr == visitedPages.end()) { // ƒLƒ…[‚ÌƒŠƒ“ƒNæ‚ª‚Ü‚¾–K‚ê‚Ä‚¢‚È‚¢ƒy[ƒW‚¾‚Á‚½‚ç
         visitedPages[linkedPageName] = links.at(queue[0]).name;
         queue.push_back(linkedPageId);
       }
@@ -62,7 +62,7 @@ deque<string> findSortestPath(unordered_map<string, pageData_t> links, string st
   return foundPath;
 }
 
-/** links å†…ã§åå‰ãŒ targetName ã®ãƒšãƒ¼ã‚¸ã® id ã‚’æ¢ã™ */
+/** links “à‚Å–¼‘O‚ª targetName ‚Ìƒy[ƒW‚Ì id ‚ğ’T‚· */
 string findTargetId(unordered_map<string, pageData_t> links, string targetName) {
   for (auto itr = links.begin(); itr != links.end(); ++itr)
   {
