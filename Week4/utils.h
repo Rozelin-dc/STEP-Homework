@@ -2,11 +2,10 @@
 using namespace std;
 
 /** そのページの名前とリンクづけられたページの id を値に持つ構造体 */
-struct _pageData
+typedef struct
 {
   string name;
   deque<string> linkedPages;
-};
-typedef struct _pageData pageData_t;
+} pageData_t;
 
 unordered_map<string, pageData_t> readData();
