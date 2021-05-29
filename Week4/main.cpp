@@ -7,14 +7,14 @@ string findTargetId(unordered_map<string, pageData_t> links, string targetName);
 
 int main() {
   unordered_map<string, pageData_t> links = readData(); // ページの id をキー、名前とリンク先を値として持つデータ
-  deque<string> foundPath = findSortestPath(links, "Google", "コンピュータ");
+  deque<string> foundPath = findSortestPath(links, "Google", "渋谷");
   deque<string> emptyDeque = {};
   if (foundPath == emptyDeque) {
     cout<<"Not Found"<<endl;
     return 1;
   }
   
-  cout<<"found path"<<endl;
+  cout<<"found!"<<endl;
   for (int i = 0; i < (int)foundPath.size(); i++)
   {
     cout<<foundPath[i]<<endl;

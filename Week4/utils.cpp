@@ -4,7 +4,7 @@ unordered_map<string, pageData_t> readData() {
   unordered_map<string, pageData_t> links = {};
 
   // id と名前のセットを読み込み
-  std::ifstream pages("./wikipedia_data/pages_small.txt");
+  std::ifstream pages("./wikipedia_data/pages.txt");
   if (pages.fail()) {
     cerr<<"Failed to open file."<<endl;
     return {};
@@ -19,7 +19,7 @@ unordered_map<string, pageData_t> readData() {
   pages.close();
 
   // id とリンク先のセットを読み込み
-  std::ifstream ifs("./wikipedia_data/links_small.txt");
+  std::ifstream ifs("./wikipedia_data/links.txt");
   if (ifs.fail()) {
     cerr<<"Failed to open file."<<endl;
     return {};
