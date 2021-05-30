@@ -44,3 +44,9 @@ g++ main.cpp utils.cpp
 
 [main.cpp の10行目](https://github.com/Rozelin-dc/STEP-Homework/blob/week4/Week4/main.cpp#L10)の`”Google”`、`”渋谷”`を変更すれば、他のページ間の最短経路も検索可能。
 
+## プログラムの説明
+
+今回は最短経路を見つけたいので、探索方法には幅優先探索を採用した。
+
+`readData`はウィキペディアのデータを読み込む関数、`findSortestPath`は第二引数から第三引数までの最短経路を探し、そこまでに通過するページが順に保存されている配列を返す関数、`findTargetId`は第二引数の名前のページのidを返す関数である。
+
