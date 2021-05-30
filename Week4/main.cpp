@@ -12,7 +12,7 @@ int main() {
   deque<string> emptyDeque = {};
   if (foundPath == emptyDeque) {
     cout<<"Not Found"<<endl;
-    return 1;
+    return 0;
   }
   
   cout<<"found!"<<endl;
