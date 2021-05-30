@@ -2,8 +2,7 @@
 using namespace std;
 
 /** そのページの名前とリンクづけられたページの id を値に持つ構造体 */
-typedef struct
-{
+typedef struct {
   string name;
   deque<string> linkedPages;
 } pageData_t;

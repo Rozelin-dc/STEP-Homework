@@ -16,8 +16,7 @@ int main() {
   }
   
   cout<<"found!"<<endl;
-  for (int i = 0; i < (int)foundPath.size(); i++)
-  {
+  for (int i = 0; i < (int)foundPath.size(); i++) {
     cout<<foundPath[i]<<endl;
   }
   return 0;
@@ -33,16 +32,16 @@ deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string s
   unordered_map<string, string> visitedPages = {}; // 訪れたページをキー、どのページから来たかを値として持つ
   deque<string> queue = {startId}; // ページの id が保存されているキュー
   bool found = false;
-  while (queue.size() > 0)
-  {
+  while (queue.size() > 0) {
     if (links.at(queue[0]).name == end) {
       found = true;
       break;
     }
-    for (int i = 0; i < (int)links.at(queue[0]).linkedPages.size(); i++)
-    {
+
+    for (int i = 0; i < (int)links.at(queue[0]).linkedPages.size(); i++) {
       string linkedPageId = links.at(queue[0]).linkedPages[i];
       string linkedPageName = links.at(linkedPageId).name;
+
       auto itr = visitedPages.find(linkedPageName);
       if (itr == visitedPages.end()) { // キューのリンク先がまだ訪れていないページだったら
         visitedPages[linkedPageName] = links.at(queue[0]).name;
@@ -55,8 +54,7 @@ deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string s
   if (!found) return {};
 
   deque<string> foundPath = {end};
-  while (foundPath[0] != start)
-  {
+  while (foundPath[0] != start) {
     foundPath.push_front(visitedPages.at(foundPath[0]));
   }
 
@@ -65,8 +63,7 @@ deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string s
 
 /** links 内で名前が targetName のページの id を探す */
 string findTargetId(unordered_map<string, pageData_t>& links, string targetName) {
-  for (auto itr = links.begin(); itr != links.end(); ++itr)
-  {
+  for (auto itr = links.begin(); itr != links.end(); ++itr) {
     if (itr->second.name == targetName) return itr->first;
   }
   return "Not Found";
