@@ -42,7 +42,7 @@ g++ main.cpp utils.cpp
 
 ”Google”から”渋谷”までの最短経路が表示される。
 
-[main.cpp の10行目](https://github.com/Rozelin-dc/STEP-Homework/blob/week4/Week4/main.cpp#L10)の`”Google”`、`”渋谷”`を変更すれば、他のページ間の最短経路も検索可能。
+[main.cpp の11行目](https://github.com/Rozelin-dc/STEP-Homework/blob/week4/Week4/main.cpp#L11)の`”Google”`、`”渋谷”`を変更すれば、他のページ間の最短経路も検索可能。
 
 ## プログラムの説明
 
