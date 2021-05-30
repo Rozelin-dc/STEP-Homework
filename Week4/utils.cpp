@@ -1,13 +1,12 @@
 #include "utils.h"
 
-unordered_map<string, pageData_t> readData() {
-  unordered_map<string, pageData_t> links = {};
-
+/** ウィキペディアのデータの読み込み */
+void readData(unordered_map<string, pageData_t>& links) {
   // id と名前のセットを読み込み
   std::ifstream pages("./wikipedia_data/pages.txt");
   if (pages.fail()) {
     cerr<<"Failed to open file."<<endl;
-    return {};
+    return;
   }
   string str;
   while (std::getline(pages, str)) {
@@ -22,7 +21,7 @@ unordered_map<string, pageData_t> readData() {
   std::ifstream ifs("./wikipedia_data/links.txt");
   if (ifs.fail()) {
     cerr<<"Failed to open file."<<endl;
-    return {};
+    return;
   }
   while (std::getline(ifs, str)) {
     auto index = str.find('\t');
@@ -32,5 +31,5 @@ unordered_map<string, pageData_t> readData() {
   }
   ifs.close();
 
-  return links;
+  return;
 }

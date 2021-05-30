@@ -2,11 +2,12 @@
 #include "utils.h"
 using namespace std;
 
-deque<string> findSortestPath(unordered_map<string, pageData_t> links, string start, string end);
-string findTargetId(unordered_map<string, pageData_t> links, string targetName);
+deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string start, string end);
+string findTargetId(unordered_map<string, pageData_t>& links, string targetName);
 
 int main() {
-  unordered_map<string, pageData_t> links = readData(); // ページの id をキー、名前とリンク先を値として持つデータ
+  unordered_map<string, pageData_t> links = {}; // ページの id をキー、名前とリンク先を値として持つ
+  readData(links);
   deque<string> foundPath = findSortestPath(links, "Google", "渋谷");
   deque<string> emptyDeque = {};
   if (foundPath == emptyDeque) {
@@ -23,7 +24,7 @@ int main() {
 }
 
 /** links 内に start と end を繋げるパスがあるか探し、見つかったら最短経路のパスを返す */
-deque<string> findSortestPath(unordered_map<string, pageData_t> links, string start, string end) {
+deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string start, string end) {
   if (start == end) return {start};
 
   string startId = findTargetId(links, start);
@@ -63,7 +64,7 @@ deque<string> findSortestPath(unordered_map<string, pageData_t> links, string st
 }
 
 /** links 内で名前が targetName のページの id を探す */
-string findTargetId(unordered_map<string, pageData_t> links, string targetName) {
+string findTargetId(unordered_map<string, pageData_t>& links, string targetName) {
   for (auto itr = links.begin(); itr != links.end(); ++itr)
   {
     if (itr->second.name == targetName) return itr->first;

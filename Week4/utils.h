@@ -8,4 +8,4 @@ typedef struct
   deque<string> linkedPages;
 } pageData_t;
 
-unordered_map<string, pageData_t> readData();
+void readData(unordered_map<string, pageData_t>& links);
