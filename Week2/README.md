@@ -18,5 +18,7 @@ R(4.0.5)
   - [ex3-report.md](./ex3-report.md)：宿題3のレポート
 - 宿題4
   - [ex4.cpp](./ex4.cpp)：宿題4のコード
+  - [ex4-cach.h](./ex4-cach.h)：キャッシュのクラスが定義されているヘッダファイル
+  - [ex4-cach.cpp](./ex4-cach.cpp)：キャッシュのクラスの関数が実装されているファイル
   - [ex4-report.md](./ex4-report.md)：宿題4のドキュメント
 
