@@ -2,13 +2,13 @@
 #include "utils.h"
 using namespace std;
 
-deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string start, string end);
+deque<string> findShortestPath(unordered_map<string, pageData_t>& links, string start, string end);
 string findTargetId(unordered_map<string, pageData_t>& links, string targetName);
 
 int main() {
   unordered_map<string, pageData_t> links = {}; // ƒy[ƒW‚Ì id ‚ğƒL[A–¼‘O‚ÆƒŠƒ“ƒNæ‚ğ’l‚Æ‚µ‚Ä‚Â
   readData(links);
-  deque<string> foundPath = findSortestPath(links, "Google", "a’J");
+  deque<string> foundPath = findShortestPath(links, "Google", "a’J");
   deque<string> emptyDeque = {};
   if (foundPath == emptyDeque) {
     cout<<"Not Found"<<endl;
@@ -23,7 +23,7 @@ int main() {
 }
 
 /** links “à‚É start ‚Æ end ‚ğŒq‚°‚éƒpƒX‚ª‚ ‚é‚©’T‚µAŒ©‚Â‚©‚Á‚½‚çÅ’ZŒo˜H‚ÌƒpƒX‚ğ•Ô‚· */
-deque<string> findSortestPath(unordered_map<string, pageData_t>& links, string start, string end) {
+deque<string> findShortestPath(unordered_map<string, pageData_t>& links, string start, string end) {
   if (start == end) return {start};
 
   string startId = findTargetId(links, start);
