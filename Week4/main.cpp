@@ -33,18 +33,20 @@ deque<string> findShortestPath(unordered_map<string, pageData_t>& links, string 
   deque<string> queue = {startId}; // ページの id が保存されているキュー
   bool found = false;
   while (queue.size() > 0) {
-    if (links.at(queue[0]).name == end) {
+    pageData_t topData = links.at(queue[0]);
+
+    if (topData.name == end) {
       found = true;
       break;
     }
 
-    for (int i = 0; i < (int)links.at(queue[0]).linkedPages.size(); i++) {
-      string linkedPageId = links.at(queue[0]).linkedPages[i];
+    for (int i = 0; i < (int)topData.linkedPages.size(); i++) {
+      string linkedPageId = topData.linkedPages[i];
       string linkedPageName = links.at(linkedPageId).name;
 
       auto itr = visitedPages.find(linkedPageName);
       if (itr == visitedPages.end()) { // キューのリンク先がまだ訪れていないページだったら
-        visitedPages[linkedPageName] = links.at(queue[0]).name;
+        visitedPages[linkedPageName] = topData.name;
         queue.push_back(linkedPageId);
       }
     }
